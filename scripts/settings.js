@@ -1,4 +1,4 @@
-Hooks.on('init',  function () {
+Hooks.on('init', function () {
     game.settings.register("map-coords", "offset", {
         name: game.i18n.format("settings.offset.name"),
         hint: game.i18n.format("settings.offset.hint"),
@@ -13,8 +13,8 @@ Hooks.on('init',  function () {
         scope: 'world',
         type: String,
         choices: {
-            "num" : "settings.value.number",
-            "let" : "settings.value.letter"
+            "num": "settings.value.number",
+            "let": "settings.value.letter"
         },
         default: "num",
         config: true,
@@ -25,8 +25,8 @@ Hooks.on('init',  function () {
         scope: 'world',
         type: String,
         choices: {
-            "num" : "settings.value.number",
-            "let" : "settings.value.letter"
+            "num": "settings.value.number",
+            "let": "settings.value.letter"
         },
         default: "num",
         config: true,
@@ -37,9 +37,9 @@ Hooks.on('init',  function () {
         scope: 'world',
         type: String,
         choices: {
-            "left" : "settings.startPoint.left",
-            "center" : "settings.startPoint.center",
-            "right" : "settings.startPoint.right"
+            "left": "settings.startPoint.left",
+            "center": "settings.startPoint.center",
+            "right": "settings.startPoint.right"
         },
         default: "left",
         config: false,
@@ -60,6 +60,4 @@ Hooks.on('init',  function () {
         default: 1500,
         config: true,
     });
-    
 })
-
