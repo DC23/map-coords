@@ -1,24 +1,23 @@
 {
   "name": "map-coords",
   "title": "Map Coordinates",
-  "description": "",
+  "description": "Map coordinates overlay",
+  "id": "map-coords",
   "version": "This is auto replaced",
+  "url": "This is auto replaced",
+  "manifest": "This is auto replaced",
+  "download": "This is auto replaced",
   "library": "false",
-  "manifestPlusVersion": "1.0.0",
-  "minimumCoreVersion": "0.8.8",
-  "compatibleCoreVersion": "9.2",
   "authors": [
     {
       "name": "Kandashi",
       "url": "https://github.com/Kandashi",
       "discord": "Kandashi (He/Him)#6698"
+    },
+    {
+      "name": "JugglinDan",
+      "url": "https://github.com/DC23"
     }
-  ],
-  "dependencies": [
-
-  ],
-  "conflicts": [
-    
   ],
   "esmodules": [
     "/scripts/settings.js",
@@ -42,7 +41,13 @@
       "path": "languages/fr.json"
     }
   ],
-  "url": "This is auto replaced",
-  "manifest": "This is auto replaced",
-  "download": "This is auto replaced"
+  "compatibility": {
+    "minimum": "8",
+    "verified": "12"
+  },
+  "relationships": {
+    "systems": [],
+    "requires": [],
+    "conflicts": []
+  }
 }
