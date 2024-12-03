@@ -38,7 +38,9 @@ class coord {
                 let name = new PreciseText(coord.formatCoordPair(rowName, colName), tinyStyle);
                 name.resolution = 4;
 
-                let pos = canvas.grid.getPixelsFromGridPosition(r + this.row0, c + this.col0);
+                const tl = canvas.grid.getTopLeftPoint({i:r + this.row0, j:c + this.col0});
+                let pos = [tl.x, tl.y]
+                // let pos = canvas.grid.getPixelsFromGridPosition(r + this.row0, c + this.col0);
                 if (this.type > 1) {
                     pos[0] = pos[0] + this.w / 3;
                     pos[1] = pos[1] + this.h / 8;
@@ -89,7 +91,7 @@ class coord {
         const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
         return [
             this.internal.left - this.off - this.size / 4,
-            tl.y + (this.h / 2)
+            tl.y + (this.h / 2)  // original code had a value of tl.y when this.type == 4
         ]
     }
 
