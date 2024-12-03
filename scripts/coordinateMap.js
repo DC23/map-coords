@@ -86,10 +86,11 @@ class coord {
     }
 
     left(row, col) {
-        let pos = canvas.grid.getPixelsFromGridPosition(row, col);
-        pos[1] += this.type == 4 ? 0 : this.h / 2;
-        pos[0] = this.internal.left - this.off - this.size / 4;
-        return pos;
+        const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
+        return [
+            this.internal.left - this.off - this.size / 4,
+            tl.y + (this.h / 2)
+        ]
     }
 
     mouseCoords() {
