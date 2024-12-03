@@ -124,7 +124,6 @@ class coord {
     }
 
     toggle() {
-        debugger;
         switch (this.state) {
             case 1: {
                 this.marginCoords.visible = false;
