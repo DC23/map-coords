@@ -166,8 +166,8 @@ class coord {
         this.yValue = game.settings.get("map-coords", "yValue");
         this.start = game.settings.get("map-coords", "startPoint");
         this.timeOut = game.settings.get("map-coords", "timeOut");
-        this.h = canvas.grid.h;
-        this.w = canvas.grid.w;
+        this.h = canvas.grid.sizeY;
+        this.w = canvas.grid.sizeX;
         this.type = canvas.grid.type;
         this.state = 2;
 
