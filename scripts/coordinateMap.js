@@ -88,9 +88,10 @@ class coord {
 
     left(row, col) {
         const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
+        const yOffset = (this.type > 1) ? 0 : this.h / 2
         return [
             this.internal.left - this.off - this.size / 4,
-            tl.y + (this.h / 2)  // original code had a value of tl.y when this.type == 4
+            tl.y + yOffset
         ]
     }
 
