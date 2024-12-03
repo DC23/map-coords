@@ -40,7 +40,6 @@ class coord {
 
                 const tl = canvas.grid.getTopLeftPoint({i:r + this.row0, j:c + this.col0});
                 let pos = [tl.x, tl.y]
-                // let pos = canvas.grid.getPixelsFromGridPosition(r + this.row0, c + this.col0);
                 if (this.type > 1) {
                     pos[0] = pos[0] + this.w / 3;
                     pos[1] = pos[1] + this.h / 8;
