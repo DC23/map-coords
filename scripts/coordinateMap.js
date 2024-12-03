@@ -78,10 +78,11 @@ class coord {
     }
 
     top(row, col) {
-        let pos = canvas.grid.getPixelsFromGridPosition(row, col);
-        pos[0] += this.w / 2;
-        pos[1] = this.internal.top - this.off - this.size / 4;
-        return pos;
+        const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
+        return [
+            tl.x + (this.w / 2), 
+            this.internal.top - this.off - this.size / 4
+        ]
     }
 
     left(row, col) {
