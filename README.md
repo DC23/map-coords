@@ -7,12 +7,6 @@
 ![GitHub Total Downloads](https://img.shields.io/github/downloads/DC23/map-coords/total?logo=GitHub&label=Downloads)
 ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/DC23/map-coords/latest/total?logo=GitHub&label=Downloads%3A%20Latest)
 
-Add coordinates to any square or hex map. Use the Measurement Controls menu with the World icon 🌐 to toggle between modes.
-
-Set the numbering style, and offset in the module settings.
-
-Alt-Click to "ping" your mouse location with its coordinates (keybind changeable in module settings).
-
 > [!IMPORTANT]
 > I, DC23, have just taken over maintenance of this module and am currently focused on bringing it up to date
 > with the Foundry v12 API. In order to release a minimal working version as quickly as possible, I'm temporarily
@@ -24,3 +18,9 @@ Alt-Click to "ping" your mouse location with its coordinates (keybind changeable
 > Both have issues that I plan to fix in the next release. I'd rather leave them out for now than release
 > when I know they don't work correctly, or delay when I'm not sure when I'll have time to fix them.
 > Since I do have a Foundry v12 version with square grids almost ready to go, it seems like a reasonable plan.
+
+Add coordinates to any square or hex map. Use the Measurement Controls menu with the World icon 🌐 to toggle between modes.
+
+Set the numbering style, and offset in the module settings.
+
+Alt-Click to "ping" your mouse location with its coordinates (keybind changeable in module settings).
