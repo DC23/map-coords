@@ -38,7 +38,8 @@ class coord {
                 let name = new PreciseText(coord.formatCoordPair(rowName, colName), tinyStyle);
                 name.resolution = 4;
 
-                let pos = canvas.grid.grid.getPixelsFromGridPosition(r + this.row0, c + this.col0);
+                const tl = canvas.grid.getTopLeftPoint({i:r + this.row0, j:c + this.col0});
+                let pos = [tl.x, tl.y]
                 if (this.type > 1) {
                     pos[0] = pos[0] + this.w / 3;
                     pos[1] = pos[1] + this.h / 8;
@@ -78,22 +79,25 @@ class coord {
     }
 
     top(row, col) {
-        let pos = canvas.grid.grid.getPixelsFromGridPosition(row, col);
-        pos[0] += this.w / 2;
-        pos[1] = this.internal.top - this.off - this.size / 4;
-        return pos;
+        const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
+        return [
+            tl.x + (this.w / 2), 
+            this.internal.top - this.off - this.size / 4
+        ]
     }
 
     left(row, col) {
-        let pos = canvas.grid.grid.getPixelsFromGridPosition(row, col);
-        pos[1] += this.type == 4 ? 0 : this.h / 2;
-        pos[0] = this.internal.left - this.off - this.size / 4;
-        return pos;
+        const tl = canvas.grid.getTopLeftPoint({i:row, j:col});
+        const yOffset = (this.type > 1) ? 0 : this.h / 2
+        return [
+            this.internal.left - this.off - this.size / 4,
+            tl.y + yOffset
+        ]
     }
 
     mouseCoords() {
         const pos = canvas.mousePosition;
-        let [row, col] = canvas.grid.grid.getGridPositionFromPixels(pos.x, pos.y);
+        let [row, col] = canvas.grid.getGridPositionFromPixels(pos.x, pos.y);
         row -= this.row0;
         col -= this.col0;
         let rowName = this.labelGen(this.yValue, row);
@@ -124,7 +128,6 @@ class coord {
     }
 
     toggle() {
-        debugger;
         switch (this.state) {
             case 1: {
                 this.marginCoords.visible = false;
@@ -156,19 +159,19 @@ class coord {
         this.size = canvas.dimensions.size;
         this.style = CONFIG.canvasTextStyle.clone();
         this.style.fontSize = this.size / 2;
-        let [row0, col0] = canvas.grid.grid.getGridPositionFromPixels(this.internal.left, this.internal.top);
-        let [row1, col1] = canvas.grid.grid.getGridPositionFromPixels(this.internal.right, this.internal.bottom);
-        this.row0 = row0;
-        this.row1 = row1;
-        this.col0 = col0;
-        this.col1 = col1;
+        const topLeft = canvas.grid.getOffset({x: this.internal.left, y: this.internal.top})
+        const bottomRight = canvas.grid.getOffset({x: this.internal.right, y: this.internal.bottom});
+        this.row0 = topLeft.i;
+        this.row1 = bottomRight.i;
+        this.col0 = topLeft.j;
+        this.col1 = bottomRight.j;
         this.off = game.settings.get("map-coords", "offset");
         this.xValue = game.settings.get("map-coords", "xValue");
         this.yValue = game.settings.get("map-coords", "yValue");
         this.start = game.settings.get("map-coords", "startPoint");
         this.timeOut = game.settings.get("map-coords", "timeOut");
-        this.h = canvas.grid.grid.h;
-        this.w = canvas.grid.grid.w;
+        this.h = canvas.grid.sizeY;
+        this.w = canvas.grid.sizeX;
         this.type = canvas.grid.type;
         this.state = 2;
 
