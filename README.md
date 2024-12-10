@@ -17,7 +17,8 @@
 >
 > Both have issues that I plan to fix in the next release. I'd rather leave them out for now than release
 > when I know they don't work correctly, or delay when I'm not sure when I'll have time to fix them.
-> Since I do have a Foundry v12 version with square grids almost ready to go, it seems like a reasonable plan.
+> Since I do have a Foundry v12 version with square grids working now, I'll release that first then catch up
+> with the other features.
 
 Add coordinates to any square or hex map. Use the Measurement Controls menu with the World icon 🌐 to toggle between modes.
 
