@@ -20,11 +20,8 @@
     }
   ],
   "esmodules": [
-    "/scripts/settings.js",
-    "/scripts/coordinateMap.js"
-  ],
-  "scripts": [
-    "/scripts/lib/lib.js"
+    "/src/settings.js",
+    "/src/coordinateMap.js"
   ],
   "styles": [
     "/styles/module.css"
