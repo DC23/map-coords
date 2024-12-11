@@ -1,4 +1,4 @@
-class coord {
+class Coord {
     // Render margin coordinates
     coords () {
         let rows = this.row1 - this.row0
@@ -34,7 +34,7 @@ class coord {
             let colName = this.labelGen(this.xValue, c)
             for (let r = 0; r < rows; r++) {
                 let rowName = this.labelGen(this.yValue, r)
-                let name = new PreciseText(coord.formatCoordPair(rowName, colName), tinyStyle)
+                let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
 
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
@@ -56,7 +56,7 @@ class coord {
             case 'let': {
                 if (i < 26) return String.fromCharCode(65 + i)
                 else {
-                    return coord.numToSSColumn(i + 1) // 1-based
+                    return Coord.numToSSColumn(i + 1) // 1-based
                 }
             }
         }
@@ -95,7 +95,7 @@ class coord {
         col -= this.col0
         let rowName = this.labelGen(this.yValue, row)
         let colName = this.labelGen(this.xValue, col)
-        let name = new PreciseText(coord.formatCoordPair(rowName, colName), this.style)
+        let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
@@ -194,7 +194,7 @@ class coord {
 }
 
 function getSceneControlButtons (buttons) {
-    if (coord.currentSceneIsSupported) {
+    if (Coord.currentSceneIsSupported) {
         const tokenButton = buttons.find(b => b.name == 'measure')
         if (tokenButton) {
             tokenButton.tools.push({
@@ -210,8 +210,8 @@ function getSceneControlButtons (buttons) {
 }
 
 Hooks.on('canvasReady', () => {
-    if (coord.currentSceneIsSupported) {
-        const map = new coord()
+    if (Coord.currentSceneIsSupported) {
+        const map = new Coord()
         window.MapCoordinates = map
     }
 })
