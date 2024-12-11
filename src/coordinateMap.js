@@ -117,6 +117,10 @@ class Coord {
     }
 
     addContainer () {
+        // todo: Code Smell: these PIXI containers are added but never removed, 
+        // and when a new scene is loaded, a new class instance is created, 
+        // which creates new PIXI containers. They are never removed, and never hidden.
+        // This is the cause of bug #22
         this.marginCoords = canvas.controls.addChild(new PIXI.Container())
         this.cellCoords = canvas.controls.addChild(new PIXI.Container())
         this.marginCoords.visible = false
@@ -213,6 +217,7 @@ Hooks.on('canvasReady', () => {
     if (Coord.currentSceneIsSupported) {
         const map = new Coord()
         window.MapCoordinates = map
+        // todo: if window.MapCoordinates already has a value, deregister it. Relates to #22
     }
 })
 
