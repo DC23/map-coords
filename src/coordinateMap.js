@@ -184,26 +184,36 @@ class coord {
         // Disabled until I sort out the appropriate way of registering a hotkey
         // this.addListener();
     }
+
+    /**
+     * @returns {Boolean} true if the current scene has a supported grid type; otherwise false
+     */
+    static get currentSceneIsSupported () {
+        return canvas.grid?.isSquare
+    }
 }
 
 function getSceneControlButtons (buttons) {
-    let tokenButton = buttons.find(b => b.name == 'measure')
-    if (tokenButton) {
-        tokenButton.tools.push({
-            name: 'map-coords',
-            title: game.i18n.format('button.name'),
-            icon: 'far fa-globe',
-            visible: true,
-            onClick: () => window.MapCoordinates.toggle(),
-            button: true,
-        })
+    if (coord.currentSceneIsSupported) {
+        const tokenButton = buttons.find(b => b.name == 'measure')
+        if (tokenButton) {
+            tokenButton.tools.push({
+                name: 'map-coords',
+                title: game.i18n.format('button.name'),
+                icon: 'far fa-globe',
+                visible: true,
+                onClick: () => window?.MapCoordinates.toggle(),
+                button: true,
+            })
+        }
     }
 }
 
 Hooks.on('canvasReady', () => {
-    if (canvas.grid.type === 0) return
-    let map = new coord()
-    window.MapCoordinates = map
+    if (coord.currentSceneIsSupported) {
+        const map = new coord()
+        window.MapCoordinates = map
+    }
 })
 
 Hooks.on('getSceneControlButtons', getSceneControlButtons)
