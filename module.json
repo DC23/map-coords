@@ -3,7 +3,7 @@
   "title": "Map Coordinates",
   "description": "Map coordinates overlay",
   "id": "map-coords",
-  "version": "This is auto replaced",
+  "version": "vDev",
   "url": "This is auto replaced",
   "manifest": "This is auto replaced",
   "download": "This is auto replaced",
@@ -39,7 +39,7 @@
     }
   ],
   "compatibility": {
-    "minimum": "8",
+    "minimum": "12",
     "verified": "12"
   },
   "relationships": {
