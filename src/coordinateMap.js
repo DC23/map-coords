@@ -106,6 +106,7 @@ class Coord {
     }
 
     addListener () {
+        // todo: code smell: do I need to remove this listener in finalize?
         canvas.stage.addListener(
             'click',
             function (event) {
@@ -117,10 +118,6 @@ class Coord {
     }
 
     addContainer () {
-        // todo: Code Smell: these PIXI containers are added but never removed, 
-        // and when a new scene is loaded, a new class instance is created, 
-        // which creates new PIXI containers. They are never removed, and never hidden.
-        // This is the cause of bug #22
         this.marginCoords = canvas.controls.addChild(new PIXI.Container())
         this.cellCoords = canvas.controls.addChild(new PIXI.Container())
         this.marginCoords.visible = false
@@ -189,6 +186,13 @@ class Coord {
         // this.addListener();
     }
 
+    finalize() {
+        canvas.controls.removeChild(this.marginCoords)
+        canvas.controls.removeChild(this.cellCoords)
+        this.marginCoords.visible = false
+        this.cellCoords.visible = false
+    }
+
     /**
      * @returns {Boolean} true if the current scene has a supported grid type; otherwise false
      */
@@ -214,10 +218,15 @@ function getSceneControlButtons (buttons) {
 }
 
 Hooks.on('canvasReady', () => {
+    // if window.MapCoordinates already has a value, deregister it. 
+    if (window.MapCoordinates) {
+        window.MapCoordinates.finalize()
+        window.MapCoordinates = null
+    }
+
     if (Coord.currentSceneIsSupported) {
         const map = new Coord()
         window.MapCoordinates = map
-        // todo: if window.MapCoordinates already has a value, deregister it. Relates to #22
     }
 })
 
