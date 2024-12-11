@@ -18,7 +18,7 @@ Hooks.on('init', function () {
             num: 'settings.value.number',
             let: 'settings.value.letter',
         },
-        default: 'num',
+        default: 'let',
         config: true,
     })
     game.settings.register('map-coords', 'yValue', {
