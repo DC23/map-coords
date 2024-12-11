@@ -3,6 +3,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.offset.name'),
         hint: game.i18n.format('settings.offset.hint'),
         scope: 'client',
+        requiresReload: true,
         type: Number,
         default: 0,
         config: true,
@@ -11,6 +12,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.xValue.name'),
         hint: game.i18n.format('settings.xValue.hint'),
         scope: 'world',
+        requiresReload: true,
         type: String,
         choices: {
             num: 'settings.value.number',
@@ -23,6 +25,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.yValue.name'),
         hint: game.i18n.format('settings.yValue.hint'),
         scope: 'world',
+        requiresReload: true,
         type: String,
         choices: {
             num: 'settings.value.number',
@@ -35,6 +38,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.startPoint.name'),
         hint: game.i18n.format('settings.startPoint.hint'),
         scope: 'world',
+        requiresReload: true,
         type: String,
         choices: {
             left: 'settings.startPoint.left',
@@ -48,6 +52,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.keybind.name'),
         hint: game.i18n.format('settings.keybind.hint'),
         scope: 'client',
+        requiresReload: false,
         type: String,
         default: 'Alt',
         config: true,
@@ -56,6 +61,7 @@ Hooks.on('init', function () {
         name: game.i18n.format('settings.timeOut.name'),
         hint: game.i18n.format('settings.timeOut.hint'),
         scope: 'client',
+        requiresReload: false,
         type: Number,
         default: 1500,
         config: true,
