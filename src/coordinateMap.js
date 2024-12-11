@@ -1,4 +1,4 @@
-class coord {
+class Coord {
     // Render margin coordinates
     coords () {
         let rows = this.row1 - this.row0
@@ -34,7 +34,7 @@ class coord {
             let colName = this.labelGen(this.xValue, c)
             for (let r = 0; r < rows; r++) {
                 let rowName = this.labelGen(this.yValue, r)
-                let name = new PreciseText(coord.formatCoordPair(rowName, colName), tinyStyle)
+                let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
 
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
@@ -56,7 +56,7 @@ class coord {
             case 'let': {
                 if (i < 26) return String.fromCharCode(65 + i)
                 else {
-                    return coord.numToSSColumn(i + 1) // 1-based
+                    return Coord.numToSSColumn(i + 1) // 1-based
                 }
             }
         }
@@ -95,7 +95,7 @@ class coord {
         col -= this.col0
         let rowName = this.labelGen(this.yValue, row)
         let colName = this.labelGen(this.xValue, col)
-        let name = new PreciseText(coord.formatCoordPair(rowName, colName), this.style)
+        let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
@@ -117,6 +117,10 @@ class coord {
     }
 
     addContainer () {
+        // todo: Code Smell: these PIXI containers are added but never removed, 
+        // and when a new scene is loaded, a new class instance is created, 
+        // which creates new PIXI containers. They are never removed, and never hidden.
+        // This is the cause of bug #22
         this.marginCoords = canvas.controls.addChild(new PIXI.Container())
         this.cellCoords = canvas.controls.addChild(new PIXI.Container())
         this.marginCoords.visible = false
@@ -184,26 +188,37 @@ class coord {
         // Disabled until I sort out the appropriate way of registering a hotkey
         // this.addListener();
     }
+
+    /**
+     * @returns {Boolean} true if the current scene has a supported grid type; otherwise false
+     */
+    static get currentSceneIsSupported () {
+        return canvas.grid?.isSquare
+    }
 }
 
 function getSceneControlButtons (buttons) {
-    let tokenButton = buttons.find(b => b.name == 'measure')
-    if (tokenButton) {
-        tokenButton.tools.push({
-            name: 'map-coords',
-            title: game.i18n.format('button.name'),
-            icon: 'far fa-globe',
-            visible: true,
-            onClick: () => window.MapCoordinates.toggle(),
-            button: true,
-        })
+    if (Coord.currentSceneIsSupported) {
+        const tokenButton = buttons.find(b => b.name == 'measure')
+        if (tokenButton) {
+            tokenButton.tools.push({
+                name: 'map-coords',
+                title: game.i18n.format('button.name'),
+                icon: 'far fa-globe',
+                visible: true,
+                onClick: () => window?.MapCoordinates.toggle(),
+                button: true,
+            })
+        }
     }
 }
 
 Hooks.on('canvasReady', () => {
-    if (canvas.grid.type === 0) return
-    let map = new coord()
-    window.MapCoordinates = map
+    if (Coord.currentSceneIsSupported) {
+        const map = new Coord()
+        window.MapCoordinates = map
+        // todo: if window.MapCoordinates already has a value, deregister it. Relates to #22
+    }
 })
 
 Hooks.on('getSceneControlButtons', getSceneControlButtons)
