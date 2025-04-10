@@ -182,8 +182,7 @@ class Coord {
         this.coords()
         this.individual()
 
-        // Disabled until I sort out the appropriate way of registering a hotkey
-        // this.addListener();
+        this.addListener();
     }
 
     finalize() {
