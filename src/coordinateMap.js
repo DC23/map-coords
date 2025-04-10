@@ -82,10 +82,10 @@ class Coord {
         return [tl.x + this.w / 2, this.internal.top - this.off - this.size / 4]
     }
 
-    // Here's the thing that had me confused when taking over maintenance on this: 
+    // Here's the thing that had me confused when taking over maintenance on this:
     // `top` and `left` here are not top and left corners of a display rect, but offsets for the
-    // top and left coordinate rows. Thus the value returned from `left` 
-    // appears to control the start position of the left-hand column of coordinates for 
+    // top and left coordinate rows. Thus the value returned from `left`
+    // appears to control the start position of the left-hand column of coordinates for
     // that display mode.
     left (row, col) {
         const tl = canvas.grid.getTopLeftPoint({ i: row, j: col })
@@ -114,7 +114,7 @@ class Coord {
         canvas.stage.addListener(
             'click',
             function (event) {
-                if (!game.keyboard.downKeys.has(game.settings.get('map-coords', 'keybind'))) {
+                if (game.keyboard.isModifierActive(game.settings.get('map-coords', 'keybind'))) {
                     return this.mouseCoords()
                 }
             }.bind(this)
@@ -186,10 +186,10 @@ class Coord {
         this.coords()
         this.individual()
 
-        this.addListener();
+        this.addListener()
     }
 
-    finalize() {
+    finalize () {
         canvas.controls.removeChild(this.marginCoords)
         canvas.controls.removeChild(this.cellCoords)
         this.marginCoords.visible = false
@@ -221,7 +221,7 @@ function getSceneControlButtons (buttons) {
 }
 
 Hooks.on('canvasReady', () => {
-    // if window.MapCoordinates already has a value, deregister it. 
+    // if window.MapCoordinates already has a value, deregister it.
     if (window.MapCoordinates) {
         window.MapCoordinates.finalize()
         window.MapCoordinates = null

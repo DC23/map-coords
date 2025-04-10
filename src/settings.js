@@ -48,15 +48,26 @@ Hooks.on('init', function () {
         default: 'left',
         config: false,
     })
+
+    // Make the keybind into a fixed choice corresponding to Foundry.KeyboardManager modifier codes.
+    // Having it as free text makes it too error prone
     game.settings.register('map-coords', 'keybind', {
         name: game.i18n.format('settings.keybind.name'),
         hint: game.i18n.format('settings.keybind.hint'),
         scope: 'client',
         requiresReload: false,
-        type: String,
+        type: new foundry.data.fields.StringField({
+            choices: {
+                'Control': 'Control',
+                'Shift': 'Shift',
+                'Alt': 'Alt',
+            },
+            required: true,
+        }),
         default: 'Alt',
         config: true,
     })
+
     game.settings.register('map-coords', 'timeOut', {
         name: game.i18n.format('settings.timeOut.name'),
         hint: game.i18n.format('settings.timeOut.hint'),
