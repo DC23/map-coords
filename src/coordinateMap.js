@@ -82,9 +82,17 @@ class Coord {
         return [tl.x + this.w / 2, this.internal.top - this.off - this.size / 4]
     }
 
+    // Here's the thing that had me confused when taking over maintenance on this: 
+    // `top` and `left` here are not top and left corners of a display rect, but offsets for the
+    // top and left coordinate rows. Thus the value returned from `left` 
+    // appears to control the start position of the left-hand column of coordinates for 
+    // that display mode.
     left (row, col) {
         const tl = canvas.grid.getTopLeftPoint({ i: row, j: col })
-        const yOffset = this.type > 1 ? 0 : this.h / 2
+        // determine the preferred offset based on the grid type, defaulting to the square grid setting,
+        // then working through the hex permutations
+        let yOffset = this.h / 2
+        // const yOffset = this.type > 1 ? this.h : this.h / 2
         return [this.internal.left - this.off - this.size / 4, tl.y + yOffset]
     }
 
