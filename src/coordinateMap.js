@@ -114,19 +114,7 @@ class Coord {
         canvas.stage.addListener(
             'click',
             function (event) {
-                console.log(game.keyboard.downKeys)
-                const keybind = game.settings.get('map-coords', 'keybind')
-                let keycodes = []
-                if (keybind === 'Alt') {
-                    keycodes.push('AltLeft', 'AltRight')
-                } else if (keybind === 'Shift') {
-                    keycodes.push('ShiftLeft', 'ShiftRight')
-                } else if (keybind === 'Control') {
-                    keycodes.push('ControlLeft', 'ControlRight')
-                }
-
-                const showCoords = keycodes.some(e => game.keyboard.downKeys.has(e))
-                if (showCoords) {
+                if (game.keyboard.isModifierActive(game.settings.get('map-coords', 'keybind'))) {
                     return this.mouseCoords()
                 }
             }.bind(this)
