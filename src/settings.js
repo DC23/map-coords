@@ -58,9 +58,9 @@ Hooks.on('init', function () {
         requiresReload: false,
         type: new foundry.data.fields.StringField({
             choices: {
-                'Control': 'Control',
-                'Shift': 'Shift',
-                'Alt': 'Alt',
+                Control: 'Control',
+                Shift: 'Shift',
+                Alt: 'Alt',
             },
             required: true,
         }),
