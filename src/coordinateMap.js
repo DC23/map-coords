@@ -89,10 +89,7 @@ class Coord {
     // that display mode.
     left (row, col) {
         const tl = canvas.grid.getTopLeftPoint({ i: row, j: col })
-        // determine the preferred offset based on the grid type, defaulting to the square grid setting,
-        // then working through the hex permutations
         let yOffset = this.h / 2
-        // const yOffset = this.type > 1 ? this.h : this.h / 2
         return [this.internal.left - this.off - this.size / 4, tl.y + yOffset]
     }
 
