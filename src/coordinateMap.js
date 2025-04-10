@@ -90,11 +90,11 @@ class Coord {
 
     mouseCoords () {
         const pos = canvas.mousePosition
-        let [row, col] = canvas.grid.getGridPositionFromPixels(pos.x, pos.y)
-        row -= this.row0
-        col -= this.col0
-        let rowName = this.labelGen(this.yValue, row)
-        let colName = this.labelGen(this.xValue, col)
+        const offset = canvas.grid.getOffset({ x: pos.x, y: pos.y })
+        const row = offset.i - this.row0
+        const col = offset.j - this.col0
+        const rowName = this.labelGen(this.yValue, row)
+        const colName = this.labelGen(this.xValue, col)
         let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
@@ -106,7 +106,6 @@ class Coord {
     }
 
     addListener () {
-        // todo: code smell: do I need to remove this listener in finalize?
         canvas.stage.addListener(
             'click',
             function (event) {
