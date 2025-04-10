@@ -49,7 +49,7 @@ Hooks.on('init', function () {
         config: false,
     })
 
-    // Make the keybind into a fixed choice from a number of sensible options
+    // Make the keybind into a fixed choice corresponding to Foundry.KeyboardManager modifier codes.
     // Having it as free text makes it too error prone
     game.settings.register('map-coords', 'keybind', {
         name: game.i18n.format('settings.keybind.name'),
