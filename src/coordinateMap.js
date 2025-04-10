@@ -200,7 +200,7 @@ class Coord {
      * @returns {Boolean} true if the current scene has a supported grid type; otherwise false
      */
     static get currentSceneIsSupported () {
-        return canvas.grid?.isSquare || canvas.grid?.isHex
+        return canvas.grid?.isSquare || canvas.grid?.isHexagonal
     }
 }
 
