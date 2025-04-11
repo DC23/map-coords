@@ -15,3 +15,5 @@
 - Alt-Click to "ping" your mouse location with its coordinates. The keybind is changeable in the module settings.
 
 The main improvements planned are quality of life enhancements, like having scenes remember the display setting mode instead of resetting each time you change scenes, and the ability to change the text colour. There are probably also bugs :)
+
+Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes.
