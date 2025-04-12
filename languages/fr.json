@@ -1,6 +1,6 @@
 {
-    "settings.offset.name": "Décalage",
-    "settings.offset.hint": "Décalage des coordonnées en pixels",
+    "settings.offset.name": "Alignement",
+    "settings.offset.hint": "Alignement des coordonnées par rapport à la bordure de la carte (en pixels)",
     "settings.xValue.name": "Valeur X",
     "settings.xValue.hint": "Marquages de chiffres ou de lettres pour la grille X",
     "settings.yValue.name": "Valeur Y",
