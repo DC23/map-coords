@@ -34,6 +34,7 @@ Hooks.on('init', function () {
         default: 'num',
         config: true,
     })
+
     game.settings.register('map-coords', 'startPoint', {
         name: game.i18n.format('settings.startPoint.name'),
         hint: game.i18n.format('settings.startPoint.hint'),
@@ -76,5 +77,15 @@ Hooks.on('init', function () {
         type: Number,
         default: 1500,
         config: true,
+    })
+
+    game.settings.register('map-coords', 'coordColour', {
+        name: 'settings.coordinate.colour.name',
+        hint: 'settings.coordinate.colour.hint',
+        scope: 'client',
+        config: true,
+        type: new foundry.data.fields.ColorField(),
+        default: '#ffffff',
+        requiresReload: true,
     })
 })
