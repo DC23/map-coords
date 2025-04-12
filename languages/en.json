@@ -1,6 +1,6 @@
 {
     "settings.offset.name": "Offset",
-        "settings.offset.hint": "Coordinate offset in pixels",
+        "settings.offset.hint": "Coordinate offset from the map edge in pixels",
         "settings.xValue.name": "X Value",
         "settings.xValue.hint": "Number or Letter markings for the X grid",
         "settings.yValue.name": "Y Value",
