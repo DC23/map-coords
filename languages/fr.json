@@ -1,6 +1,6 @@
 {
-    "settings.offset.name": "Décalage",
-    "settings.offset.hint": "Décalage des coordonnées en pixels",
+    "settings.offset.name": "Alignement",
+    "settings.offset.hint": "Alignement des coordonnées par rapport à la bordure de la carte (en pixels)",
     "settings.xValue.name": "Valeur X",
     "settings.xValue.hint": "Marquages de chiffres ou de lettres pour la grille X",
     "settings.yValue.name": "Valeur Y",
@@ -11,5 +11,7 @@
     "settings.timeOut.hint": "Combien de temps à afficher pour ‘Coordonnée en un Clic'",
     "settings.value.number": "Numéro",
     "settings.value.letter": "Lettre",
-    "button.name": "Basculer les coordonnées"
+    "button.name": "Basculer les coordonnées",
+    "settings.coordinate.colour.name": "Couleur de la Police pour les coordonnées",
+    "settings.coordinate.colour.hint": ""
 }

@@ -162,6 +162,7 @@ class Coord {
         this.padY = canvas.dimensions.padY
         this.size = canvas.dimensions.size
         this.style = CONFIG.canvasTextStyle.clone()
+        this.style.fill = game.settings.get('map-coords', 'coordColour')
         this.style.fontSize = this.size / 2
         const topLeft = canvas.grid.getOffset({ x: this.internal.left, y: this.internal.top })
         const bottomRight = canvas.grid.getOffset({
