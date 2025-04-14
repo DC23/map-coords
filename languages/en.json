@@ -13,5 +13,7 @@
     "settings.value.letter": "Letter",
     "button.name": "Toggle Coordinates",
     "settings.coordinate.colour.name": "Coordinate Font Colour",
-    "settings.coordinate.colour.hint": ""
+    "settings.coordinate.colour.hint": "",
+    "settings.leadingzeroes.name": "Leading Zeroes",
+    "settings.leadingzeroes.hint": "Display Leading Zeroes on Numeric Coodinates"
 }
