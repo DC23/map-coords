@@ -56,7 +56,7 @@ class Coord {
     labelGen (val, i) {
         switch (val) {
             case 'num':
-                return `${i + 1}` // convert to 1-based
+                return `${(i + 1).toString().padStart(this.coordinatePadding, '0')}` // convert to 1-based
             case 'let': {
                 if (i < 26) return String.fromCharCode(65 + i)
                 else {
@@ -184,6 +184,16 @@ class Coord {
         this.w = canvas.grid.sizeX
         this.type = canvas.grid.type
         this.state = 2
+
+        // if the setting is true, set the zero padding to the number
+        // of digits in the max of the scene columns and rows
+        if (game.settings.get('map-coords', 'leadingZeroes')) {
+            this.coordinatePadding = String(
+                Math.max(canvas.dimensions.columns, canvas.dimensions.rows)
+            ).length
+        } else {
+            this.coordinatePadding = 0
+        }
 
         this.addContainer()
         this.coords(canvas.dimensions.rows, canvas.dimensions.columns)
