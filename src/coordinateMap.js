@@ -1,24 +1,46 @@
 class Coord {
     // Render margin coordinates
     coords (rows, cols) {
-        for (let i = 0; i < cols; i++) {
-            let label = this.labelGen(this.xValue, this.applyHexColumnAdjustment(i))
-            const name = new PreciseText(label, this.style)
+        /*
+        Since the count of rows and columns includes padding, and was always problematic on hex grids 
+        since the dimensions are funky in one direction, I'll switch to the algorithm used on
+        individual coordinates: keep iterating until the coordinate position crosses the 
+        relevant threshold.
+        For the horizontal row of column coordinates, the threshold is pos[1] >= this.internal.right
+        For the vertical column of row coordinates, the threshold is is pos[0] >= this.internal.bottom
+        */
+        let pos = [0, 0]
+        let i = 0
+        let name = null
+        // The horizontal row of column coordinates
+        do {
+            const adjustedColumnIndex = this.applyHexColumnAdjustment(i)
+            let label = this.labelGen(this.xValue, adjustedColumnIndex)
+            name = new PreciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
-            let pos = this.top(this.row0, i + this.col0)
+            pos = this.top(this.row0, i + this.col0)
             name.position.set(pos[0], pos[1])
-            this.marginCoords.addChild(name)
-        }
-        for (let i = 0; i < rows; i++) {
-            let label = this.labelGen(this.yValue, this.applyHexRowAdjustment(i))
-            const name = new PreciseText(label, this.style)
-            name.resolution = 4
-            name.anchor.set(0.5, 0.5)
-            let pos = this.left(i + this.row0, this.col0)
-            name.position.set(pos[0], pos[1])
-            this.marginCoords.addChild(name)
-        }
+
+            // don't render coordinates for the first hex columns when it's been adjusted into a negative value.
+            // It looks funky and isn't required.
+            if (adjustedColumnIndex >= 0) {
+                this.marginCoords.addChild(name)
+            }
+            i += 1
+        } while (pos[0] + name.width < this.internal.right) // stop when the label will exceed the right edge
+
+        // The vertical column of row coordinates
+        // do {
+        //     let label = this.labelGen(this.yValue, this.applyHexRowAdjustment(i))
+        //     const name = new PreciseText(label, this.style)
+        //     name.resolution = 4
+        //     name.anchor.set(0.5, 0.5)
+        //     let pos = this.left(i + this.row0, this.col0)
+        //     name.position.set(pos[0], pos[1])
+        //     this.marginCoords.addChild(name)
+        //     i += 1
+        // } while (pos[0] < this.internal.bottom)
     }
 
     // Render grid cell coordinates
