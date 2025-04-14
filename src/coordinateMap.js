@@ -26,7 +26,7 @@ class Coord {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
         let c = 0
-        let pos = [0, 0]
+        let pos = [this.internal.x, this.internal.y]
         do {
             let colName = this.labelGen(this.xValue, this.applyHexColumnAdjustment(c))
             let r = 0
@@ -54,9 +54,9 @@ class Coord {
                 }
 
                 r += 1
-            } while (pos[1] < this.internal.height)
+            } while (pos[1] < this.internal.bottom)
             c += 1
-        } while (pos[0] < this.internal.width)
+        } while (pos[0] < this.internal.right)
     }
 
     labelGen (val, i) {
