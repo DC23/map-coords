@@ -25,15 +25,15 @@ class Coord {
     individual (rows, cols) {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
-
-        for (let c = 0; c < cols; c++) {
+        let c = 0
+        let pos = [0,0]
+        do {
             let colName = this.labelGen(this.xValue, c)
-            let pos = null
-            for (let r = 0; r < rows; r++) {
+            let r = 0
+            do {
                 let rowName = this.labelGen(this.yValue, r)
                 let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
-
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
                 pos = [tl.x, tl.y]
                 if (this.type > 1) {
@@ -42,10 +42,10 @@ class Coord {
                 }
                 name.position.set(pos[0], pos[1])
                 this.cellCoords.addChild(name)
-            }
-
-            console.log(pos)
-        }
+                r += 1
+            } while (pos[1] < this.internal.height)
+            c += 1
+        } while (pos[0] < this.internal.width)
     }
 
     labelGen (val, i) {
