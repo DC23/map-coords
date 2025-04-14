@@ -88,4 +88,14 @@ Hooks.on('init', function () {
         default: '#ffffff',
         requiresReload: true,
     })
+
+    game.settings.register('map-coords', 'leadingZeroes', {
+        name: 'settings.leadingzeroes.name',
+        hint: 'settings.leadingzeroes.hint',
+        scope: 'world',
+        config: true,
+        type: Boolean,
+        default: false,
+        requiresReload: true,
+    })
 })
