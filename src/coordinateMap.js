@@ -176,8 +176,6 @@ class Coord {
 
     constructor () {
         this.internal = canvas.dimensions.sceneRect
-        this.shiftX = canvas.dimensions.shiftX
-        this.shiftY = canvas.dimensions.shiftY
         this.size = canvas.dimensions.size
         this.style = CONFIG.canvasTextStyle.clone()
         this.style.fill = game.settings.get('map-coords', 'coordColour')
