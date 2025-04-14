@@ -35,21 +35,6 @@ Hooks.on('init', function () {
         config: true,
     })
 
-    game.settings.register('map-coords', 'startPoint', {
-        name: game.i18n.format('settings.startPoint.name'),
-        hint: game.i18n.format('settings.startPoint.hint'),
-        scope: 'world',
-        requiresReload: true,
-        type: String,
-        choices: {
-            left: 'settings.startPoint.left',
-            center: 'settings.startPoint.center',
-            right: 'settings.startPoint.right',
-        },
-        default: 'left',
-        config: false,
-    })
-
     // Make the keybind into a fixed choice corresponding to Foundry.KeyboardManager modifier codes.
     // Having it as free text makes it too error prone
     game.settings.register('map-coords', 'keybind', {

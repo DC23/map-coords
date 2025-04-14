@@ -22,7 +22,7 @@ class Coord {
     }
 
     // Render grid cell coordinates
-    individual (rows, cols) {
+    individual () {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
         let c = 0
@@ -185,16 +185,11 @@ class Coord {
         this.style.fill = game.settings.get('map-coords', 'coordColour')
         this.style.fontSize = this.size / 2
         const topLeft = canvas.grid.getOffset({ x: this.internal.left, y: this.internal.top })
-        const bottomRight = canvas.grid.getOffset({
-            x: this.internal.right,
-            y: this.internal.bottom,
-        })
         this.row0 = topLeft.i
         this.col0 = topLeft.j
         this.off = game.settings.get('map-coords', 'offset')
         this.xValue = game.settings.get('map-coords', 'xValue')
         this.yValue = game.settings.get('map-coords', 'yValue')
-        this.start = game.settings.get('map-coords', 'startPoint')
         this.timeOut = game.settings.get('map-coords', 'timeOut')
         this.h = canvas.grid.sizeY
         this.w = canvas.grid.sizeX
@@ -213,7 +208,7 @@ class Coord {
 
         this.addContainer()
         this.coords(canvas.dimensions.rows, canvas.dimensions.columns)
-        this.individual(canvas.dimensions.rows, canvas.dimensions.columns)
+        this.individual()
 
         this.addListener()
     }
