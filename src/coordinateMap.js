@@ -97,11 +97,21 @@ class Coord {
         return [this.internal.left - this.off - this.size / 4, tl.y + yOffset]
     }
 
+    // Apply the -1 adjustment for Hex Row Even layouts, so that the top-left complete hex is numbered as the first on the map
+    applyHexRowAdjustment (row) {
+        return canvas.grid.isHexagonal && canvas.grid.even && !canvas.grid.columns ? row - 1 : row
+    }
+
+    // Apply the -1 adjustment for Hex Column Even layouts, so that the top-left complete hex is numbered as the first on the map
+    applyHexColumnAdjustment (col) {
+        return canvas.grid.isHexagonal && canvas.grid.even && canvas.grid.columns ? col - 1 : col
+    }
+
     mouseCoords () {
         const pos = canvas.mousePosition
         const offset = canvas.grid.getOffset({ x: pos.x, y: pos.y })
-        const row = offset.i - this.row0
-        const col = offset.j - this.col0
+        const row = this.applyHexRowAdjustment(offset.i - this.row0)
+        const col = this.applyHexColumnAdjustment(offset.j - this.col0)
         const rowName = this.labelGen(this.yValue, row)
         const colName = this.labelGen(this.xValue, col)
         let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
