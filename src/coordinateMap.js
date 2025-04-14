@@ -2,7 +2,7 @@ class Coord {
     // Render margin coordinates
     coords (rows, cols) {
         for (let i = 0; i < cols; i++) {
-            let label = this.labelGen(this.xValue, i)
+            let label = this.labelGen(this.xValue, this.applyHexColumnAdjustment(i))
             const name = new PreciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
@@ -11,7 +11,7 @@ class Coord {
             this.marginCoords.addChild(name)
         }
         for (let i = 0; i < rows; i++) {
-            let label = this.labelGen(this.yValue, i)
+            let label = this.labelGen(this.yValue, this.applyHexRowAdjustment(i))
             const name = new PreciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5, 0.5)
