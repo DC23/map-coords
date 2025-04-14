@@ -38,7 +38,10 @@ class Coord {
                 pos = [tl.x, tl.y]
                 if (this.type > 1) {
                     pos[0] = pos[0] + this.w / 3
-                    pos[1] = pos[1] + this.h / 8
+                    pos[1] = pos[1]
+
+                    // nudge the text down only for row grids
+                    if (!canvas.grid.columns) pos[1] += this.h / 12
                 }
 
                 // it looks neater if we only render those internal coordinates that are inside the scene boundary
