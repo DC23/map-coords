@@ -26,7 +26,7 @@ class Coord {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
         let c = 0
-        let pos = [0,0]
+        let pos = [0, 0]
         do {
             let colName = this.labelGen(this.xValue, c)
             let r = 0
@@ -40,8 +40,13 @@ class Coord {
                     pos[0] = pos[0] + this.w / 3
                     pos[1] = pos[1] + this.h / 8
                 }
-                name.position.set(pos[0], pos[1])
-                this.cellCoords.addChild(name)
+
+                // it looks neater if we only render those internal coordinates that are inside the scene boundary
+                if (this.internal.contains(pos[0], pos[1])) {
+                    name.position.set(pos[0], pos[1])
+                    this.cellCoords.addChild(name)
+                }
+
                 r += 1
             } while (pos[1] < this.internal.height)
             c += 1
