@@ -36,12 +36,15 @@ class Coord {
                 name.resolution = 4
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
                 pos = [tl.x, tl.y]
-                if (this.type > 1) {
-                    pos[0] = pos[0] + this.w / 3
-                    pos[1] = pos[1]
 
-                    // nudge the text down only for row grids
-                    if (!canvas.grid.columns) pos[1] += this.h / 12
+                if (canvas.grid.isHexagonal) {
+                    // centre the text horizontally by adding half the width of the hex cell
+                    // the subtracting half the width of the text
+                    pos[0] += this.w / 2 - name.width / 2
+
+                    // nudge the text down only for row grids since it gets crowded in the vertex
+                    // by trial and error, 1/3 of the text height is enough
+                    if (!canvas.grid.columns) pos[1] += name.height / 3
                 }
 
                 // it looks neater if we only render those internal coordinates that are inside the scene boundary
