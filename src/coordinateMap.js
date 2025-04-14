@@ -24,23 +24,35 @@ class Coord {
 
             // don't render coordinates for the first hex columns when it's been adjusted into a negative value.
             // It looks funky and isn't required.
-            if (adjustedColumnIndex >= 0) {
+            // Also don't render when the name is outside the left or right bounds
+            if (
+                pos[0] >= this.internal.left &&
+                pos[0] <= this.internal.right &&
+                adjustedColumnIndex >= 0
+            ) {
                 this.marginCoords.addChild(name)
             }
             i += 1
         } while (pos[0] + name.width < this.internal.right) // stop when the label will exceed the right edge
 
         // The vertical column of row coordinates
-        // do {
-        //     let label = this.labelGen(this.yValue, this.applyHexRowAdjustment(i))
-        //     const name = new PreciseText(label, this.style)
-        //     name.resolution = 4
-        //     name.anchor.set(0.5, 0.5)
-        //     let pos = this.left(i + this.row0, this.col0)
-        //     name.position.set(pos[0], pos[1])
-        //     this.marginCoords.addChild(name)
-        //     i += 1
-        // } while (pos[0] < this.internal.bottom)
+        i = 0
+        do {
+            const adjustedRowIndex = this.applyHexRowAdjustment(i)
+            let label = this.labelGen(this.yValue, adjustedRowIndex)
+            name = new PreciseText(label, this.style)
+            name.resolution = 4
+            name.anchor.set(0.5, 0.5)
+            pos = this.left(i + this.row0, this.col0)
+            name.position.set(pos[0], pos[1])
+
+            // don't render coordinates for the first hex row when it's been adjusted into a negative value.
+            // It looks funky and isn't required.
+            if (adjustedRowIndex >= 0) {
+                this.marginCoords.addChild(name)
+            }
+            i += 1
+        } while (pos[1] + name.height < this.internal.bottom)
     }
 
     // Render grid cell coordinates
