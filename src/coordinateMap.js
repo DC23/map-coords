@@ -48,7 +48,11 @@ class Coord {
 
             // don't render coordinates for the first hex row when it's been adjusted into a negative value.
             // It looks funky and isn't required.
-            if (adjustedRowIndex >= 0) {
+            if (
+                pos[1] >= this.internal.top &&
+                pos[1] <= this.internal.bottom &&
+                adjustedRowIndex >= 0
+            ) {
                 this.marginCoords.addChild(name)
             }
             i += 1
