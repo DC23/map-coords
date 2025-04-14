@@ -1,8 +1,6 @@
 class Coord {
     // Render margin coordinates
-    coords () {
-        let rows = this.row1 - this.row0
-        let cols = this.col1 - this.col0
+    coords (rows, cols) {
         for (let i = 0; i < cols; i++) {
             let label = this.labelGen(this.xValue, i)
             const name = new PreciseText(label, this.style)
@@ -24,21 +22,20 @@ class Coord {
     }
 
     // Render grid cell coordinates
-    individual () {
-        let rows = this.row1 - this.row0
-        let cols = this.col1 - this.col0
+    individual (rows, cols) {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
 
         for (let c = 0; c < cols; c++) {
             let colName = this.labelGen(this.xValue, c)
+            let pos = null
             for (let r = 0; r < rows; r++) {
                 let rowName = this.labelGen(this.yValue, r)
                 let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
 
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
-                let pos = [tl.x, tl.y]
+                pos = [tl.x, tl.y]
                 if (this.type > 1) {
                     pos[0] = pos[0] + this.w / 3
                     pos[1] = pos[1] + this.h / 8
@@ -46,6 +43,8 @@ class Coord {
                 name.position.set(pos[0], pos[1])
                 this.cellCoords.addChild(name)
             }
+
+            console.log(pos)
         }
     }
 
@@ -170,9 +169,7 @@ class Coord {
             y: this.internal.bottom,
         })
         this.row0 = topLeft.i
-        this.row1 = bottomRight.i
         this.col0 = topLeft.j
-        this.col1 = bottomRight.j
         this.off = game.settings.get('map-coords', 'offset')
         this.xValue = game.settings.get('map-coords', 'xValue')
         this.yValue = game.settings.get('map-coords', 'yValue')
@@ -184,8 +181,8 @@ class Coord {
         this.state = 2
 
         this.addContainer()
-        this.coords()
-        this.individual()
+        this.coords(canvas.dimensions.rows, canvas.dimensions.columns)
+        this.individual(canvas.dimensions.rows, canvas.dimensions.columns)
 
         this.addListener()
     }
