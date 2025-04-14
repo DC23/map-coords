@@ -28,10 +28,10 @@ class Coord {
         let c = 0
         let pos = [0, 0]
         do {
-            let colName = this.labelGen(this.xValue, c)
+            let colName = this.labelGen(this.xValue, this.applyHexColumnAdjustment(c))
             let r = 0
             do {
-                let rowName = this.labelGen(this.yValue, r)
+                let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
                 let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
