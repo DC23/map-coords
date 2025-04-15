@@ -210,6 +210,10 @@ class Coord {
 
     // coordinate display state
     get #displayState () {
+        // Non-GM users can temporarily override the state from the GM-controlled
+        // persistent state. If this has been done, return that value instead of the
+        // flag, with a final fallback to the default.
+        if (this.overrideDisplayState) return this.overrideDisplayState
         return (
             canvas?.scene.getFlag('map-coords', 'coordinate-state') ||
             COORDINATE_DISPLAY_STATES.HIDDEN
@@ -239,7 +243,8 @@ class Coord {
                     }
                     break
             }
-            canvas.scene.setFlag('map-coords', 'coordinate-state', state)
+            if (game.user.isGM) canvas.scene.setFlag('map-coords', 'coordinate-state', state)
+            else this.overrideDisplayState = state
         }
     }
 
@@ -328,3 +333,17 @@ Hooks.on('canvasReady', () => {
 })
 
 Hooks.on('getSceneControlButtons', getSceneControlButtons)
+
+Hooks.on('init', registerKeybindings)
+
+function registerKeybindings () {
+    game.keybindings.register('map-coords', 'toggle-coordinates', {
+        name: 'button.name',
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
+        restricted: false,
+        onDown: () => {
+            window?.MapCoordinates?.toggle()
+            return true
+        },
+    })
+}
