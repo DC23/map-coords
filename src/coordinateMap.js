@@ -1,3 +1,10 @@
+// Coordinate display states
+const COORDINATE_DISPLAY_STATES = {
+    HIDDEN: 1,
+    ROW_COLUMN: 2,
+    CELL: 3,
+}
+
 class Coord {
     // Render margin coordinates
     coords (rows, cols) {
@@ -186,29 +193,53 @@ class Coord {
         this.cellCoords.visible = false
     }
 
+    // switch to the next coordinate display state
     toggle () {
-        switch (this.state) {
-            case 1:
-                {
-                    this.marginCoords.visible = false
-                    this.cellCoords.visible = false
-                    this.state = 2
-                }
+        switch (this.#displayState) {
+            case COORDINATE_DISPLAY_STATES.HIDDEN:
+                this.#displayState = COORDINATE_DISPLAY_STATES.ROW_COLUMN
                 break
-            case 2:
-                {
-                    this.marginCoords.visible = true
-                    this.cellCoords.visible = false
-                    this.state = 3
-                }
+            case COORDINATE_DISPLAY_STATES.ROW_COLUMN:
+                this.#displayState = COORDINATE_DISPLAY_STATES.CELL
                 break
-            case 3:
-                {
-                    this.marginCoords.visible = false
-                    this.cellCoords.visible = true
-                    this.state = 1
-                }
+            case COORDINATE_DISPLAY_STATES.CELL:
+                this.#displayState = COORDINATE_DISPLAY_STATES.HIDDEN
                 break
+        }
+    }
+
+    // coordinate display state
+    get #displayState () {
+        return (
+            canvas?.scene.getFlag('map-coords', 'coordinate-state') ||
+            COORDINATE_DISPLAY_STATES.HIDDEN
+        )
+    }
+
+    set #displayState (state) {
+        if (canvas.scene) {
+            switch (state) {
+                default:
+                case COORDINATE_DISPLAY_STATES.HIDDEN:
+                    {
+                        this.marginCoords.visible = false
+                        this.cellCoords.visible = false
+                    }
+                    break
+                case COORDINATE_DISPLAY_STATES.ROW_COLUMN:
+                    {
+                        this.marginCoords.visible = true
+                        this.cellCoords.visible = false
+                    }
+                    break
+                case COORDINATE_DISPLAY_STATES.CELL:
+                    {
+                        this.marginCoords.visible = false
+                        this.cellCoords.visible = true
+                    }
+                    break
+            }
+            canvas.scene.setFlag('map-coords', 'coordinate-state', state)
         }
     }
 
@@ -228,7 +259,6 @@ class Coord {
         this.h = canvas.grid.sizeY
         this.w = canvas.grid.sizeX
         this.type = canvas.grid.type
-        this.state = 2
 
         // if the setting is true, set the zero padding to the number
         // of digits in the max of the scene columns and rows
@@ -245,6 +275,12 @@ class Coord {
         this.individual()
 
         this.addListener()
+
+        // once all the PIXI items are built, we can set the initial display state.
+        // This will either set from the current scene flags, or to the default hidden state
+        // if it's the first time we've viewed this scene.
+        // This implementation also makes it easier to add a keybind later
+        this.#displayState = this.#displayState
     }
 
     finalize () {
