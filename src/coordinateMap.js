@@ -1,24 +1,62 @@
 class Coord {
     // Render margin coordinates
     coords (rows, cols) {
-        for (let i = 0; i < cols; i++) {
-            let label = this.labelGen(this.xValue, this.applyHexColumnAdjustment(i))
-            const name = new PreciseText(label, this.style)
+        /*
+        Since the count of rows and columns includes padding, and was always problematic on hex grids 
+        since the dimensions are funky in one direction, I'll switch to the algorithm used on
+        individual coordinates: keep iterating until the coordinate position crosses the 
+        relevant threshold.
+        For the horizontal row of column coordinates, the threshold is pos[1] >= this.internal.right
+        For the vertical column of row coordinates, the threshold is is pos[0] >= this.internal.bottom
+        */
+        let pos = [0, 0]
+        let i = 0
+        let name = null
+        // The horizontal row of column coordinates
+        do {
+            const adjustedColumnIndex = this.applyHexColumnAdjustment(i)
+            let label = this.labelGen(this.xValue, adjustedColumnIndex)
+            name = new PreciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
-            let pos = this.top(this.row0, i + this.col0)
+            pos = this.top(this.row0, i + this.col0)
             name.position.set(pos[0], pos[1])
-            this.marginCoords.addChild(name)
-        }
-        for (let i = 0; i < rows; i++) {
-            let label = this.labelGen(this.yValue, this.applyHexRowAdjustment(i))
-            const name = new PreciseText(label, this.style)
+
+            // don't render coordinates for the first hex columns when it's been adjusted into a negative value.
+            // It looks funky and isn't required.
+            // Also don't render when the name is outside the left or right bounds
+            if (
+                pos[0] >= this.internal.left &&
+                pos[0] <= this.internal.right &&
+                adjustedColumnIndex >= 0
+            ) {
+                this.marginCoords.addChild(name)
+            }
+            i += 1
+        } while (pos[0] + name.width < this.internal.right) // stop when the label will exceed the right edge
+
+        // The vertical column of row coordinates
+        i = 0
+        do {
+            const adjustedRowIndex = this.applyHexRowAdjustment(i)
+            let label = this.labelGen(this.yValue, adjustedRowIndex)
+            name = new PreciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5, 0.5)
-            let pos = this.left(i + this.row0, this.col0)
+            pos = this.left(i + this.row0, this.col0)
             name.position.set(pos[0], pos[1])
-            this.marginCoords.addChild(name)
-        }
+
+            // don't render coordinates for the first hex row when it's been adjusted into a negative value.
+            // It looks funky and isn't required.
+            if (
+                pos[1] >= this.internal.top &&
+                pos[1] <= this.internal.bottom &&
+                adjustedRowIndex >= 0
+            ) {
+                this.marginCoords.addChild(name)
+            }
+            i += 1
+        } while (pos[1] + name.height < this.internal.bottom)
     }
 
     // Render grid cell coordinates
@@ -26,7 +64,7 @@ class Coord {
         let tinyStyle = this.style.clone()
         tinyStyle.fontSize = this.size / 8
         let c = 0
-        let pos = [0, 0]
+        let pos = [this.internal.x, this.internal.y]
         do {
             let colName = this.labelGen(this.xValue, this.applyHexColumnAdjustment(c))
             let r = 0
@@ -54,9 +92,9 @@ class Coord {
                 }
 
                 r += 1
-            } while (pos[1] < this.internal.height)
+            } while (pos[1] < this.internal.bottom)
             c += 1
-        } while (pos[0] < this.internal.width)
+        } while (pos[0] < this.internal.right)
     }
 
     labelGen (val, i) {
@@ -176,10 +214,6 @@ class Coord {
 
     constructor () {
         this.internal = canvas.dimensions.sceneRect
-        this.shiftX = canvas.dimensions.shiftX
-        this.shiftY = canvas.dimensions.shiftY
-        this.padX = canvas.dimensions.padX
-        this.padY = canvas.dimensions.padY
         this.size = canvas.dimensions.size
         this.style = CONFIG.canvasTextStyle.clone()
         this.style.fill = game.settings.get('map-coords', 'coordColour')
