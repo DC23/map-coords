@@ -342,7 +342,7 @@ function registerKeybindings () {
         precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
         restricted: false,
         onDown: () => {
-            window?.MapCoordinates?.toggle()
+            window?.MapCoordinates.toggle()
             return true
         },
     })
