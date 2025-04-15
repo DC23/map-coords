@@ -74,6 +74,26 @@ Hooks.on('init', function () {
         requiresReload: true,
     })
 
+    game.settings.register('map-coords', 'internalCoordSize', {
+        name: 'settings.internal-coordinate-size.name',
+        hint: 'settings.internal-coordinate-size.hint',
+        scope: 'client',
+        config: true,
+        type: new foundry.data.fields.NumberField({ min: 5, max: 60 }),
+        default: 14,
+        requiresReload: true,
+    })
+
+    game.settings.register('map-coords', 'internalCoordAlpha', {
+        name: 'settings.internal-coordinate-alpha.name',
+        hint: 'settings.internal-coordinate-alpha.hint',
+        scope: 'client',
+        config: true,
+        type: new foundry.data.fields.AlphaField({ min: 0.05, max: 1.0 }),
+        default: 0.9,
+        requiresReload: true,
+    })
+
     game.settings.register('map-coords', 'leadingZeroes', {
         name: 'settings.leadingzeroes.name',
         hint: 'settings.leadingzeroes.hint',

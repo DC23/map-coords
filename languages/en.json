@@ -15,5 +15,9 @@
     "settings.coordinate.colour.name": "Coordinate Font Colour",
     "settings.coordinate.colour.hint": "",
     "settings.leadingzeroes.name": "Leading Zeroes",
-    "settings.leadingzeroes.hint": "Display Leading Zeroes on Numeric Coodinates"
+    "settings.leadingzeroes.hint": "Display Leading Zeroes on Numeric Coordinates",
+    "settings.internal-coordinate-size.name": "Internal Coordinate Percentage Size",
+    "settings.internal-coordinate-size.hint": "Size of the internal font as a percentage of the grid cell",
+    "settings.internal-coordinate-alpha.name": "Internal Coordinate Transparency",
+    "settings.internal-coordinate-alpha.hint": ""
 }
