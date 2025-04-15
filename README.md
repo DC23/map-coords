@@ -8,12 +8,21 @@
 ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/DC23/map-coords/latest/total?logo=GitHub&label=Downloads%3A%20Latest)
 
 > [!IMPORTANT]
-> With the v0.4.0 release, the missing features have been reinstated. There is still work to do to refine what's here, but this module is feature complete once more!
+> v1.0.0 release! This module is now feature complete. I might still add improvements, but everything is now present and working as far as I know 😀
 
 - Add coordinates to any square or hex map. Use the Measurement Controls menu with the World icon 🌐 to toggle between display modes.
-- Set the numbering style, and offset in the module settings.
+- Set the numbering style - letters or numbers, font colour, and whether leading zeroes are used in the module settings.
 - Alt-Click to "ping" your mouse location with its coordinates. The keybind is changeable in the module settings.
-
-The main improvements planned are quality of life enhancements, like having scenes remember the display setting mode instead of resetting each time you change scenes, and the ability to change the text colour. There are probably also bugs :)
+- Each scene now remembers whether the coordinates are shown or hidden for that scene.
 
 Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes.
+
+## Gallery
+
+| Feature | Preview |
+| ------- | ------- |
+| Toggle the coordinate display mode | ![image showing the map display control](./media/toggle1.jpg) |
+| Alternately display coordinates inside each grid cell | ![Coordinates displayed in each grid cell](./media/internal.jpg) |
+| Alt-click to *ping* the coordinates at the mouse location | ![Alt-click to ping mouse coordinates](./media/alt-click-to-ping-coordinates.jpg) |
+| Great for hex crawls! | ![Great for hex crawls!](./media/hex-crawl.jpg) |
+| Also great for sci-fi sector maps! | ![Also great for sci-fi sector maps! ](./media/space-sector-map.jpg) |
