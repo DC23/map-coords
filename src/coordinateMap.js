@@ -69,7 +69,9 @@ class Coord {
     // Render grid cell coordinates
     individual () {
         let tinyStyle = this.style.clone()
-        tinyStyle.fontSize = this.size / 8
+        const fontScale = Math.max(10, game.settings.get('map-coords', 'internalCoordSize')) / 100
+        tinyStyle.fontSize = this.size * fontScale
+        const alpha = game.settings.get('map-coords', 'internalCoordAlpha')
         let c = 0
         let pos = [this.internal.x, this.internal.y]
         do {
@@ -79,6 +81,7 @@ class Coord {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
                 let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
+                name.alpha = alpha
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
                 pos = [tl.x, tl.y]
 
