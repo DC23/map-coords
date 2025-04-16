@@ -20,9 +20,9 @@
 
 | Feature | Preview |
 | ------- | ------- |
-| Toggle the coordinate display mode by button or hotkey | ![image showing the map display control](./media/toggle1.jpg) |
-| Alternately display coordinates inside each grid cell | ![Coordinates displayed in each grid cell](./media/internal.jpg) |
+| Coordinates show along the top and left map edges. Toggle the display mode by button or hotkey. | ![image showing the map display control](./media/toggle1.jpg) |
+| View showing coordinates inside each grid cell | ![Coordinates displayed in each grid cell](./media/internal.jpg) |
 | Adjustable font size, colour, and transparency for internal coordinates | ![Adjustable font size, colour, and transparency](./media/alpha.jpg) |
-| Alt-click to *ping* the coordinates at the mouse location | ![Alt-click to ping mouse coordinates](./media/alt-click-to-ping-coordinates.jpg) |
+| Alt-click to *ping* the coordinates at the mouse location. The mouse coordinate appears for a couple of seconds then fades away. The time is adjustable in the settings. | ![Alt-click to ping mouse coordinates](./media/alt-click-to-ping-coordinates.jpg) |
 | Great for hex crawls! | ![Great for hex crawls!](./media/hex-crawl.jpg) |
 | Also great for sci-fi sector maps! | ![Also great for sci-fi sector maps! ](./media/space-sector-map.jpg) |
