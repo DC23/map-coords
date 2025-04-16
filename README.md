@@ -20,7 +20,7 @@
 
 | Feature | Preview |
 | ------- | ------- |
-| Toggle the coordinate display mode | ![image showing the map display control](./media/toggle1.jpg) |
+| Toggle the coordinate display mode by button or hotkey | ![image showing the map display control](./media/toggle1.jpg) |
 | Alternately display coordinates inside each grid cell | ![Coordinates displayed in each grid cell](./media/internal.jpg) |
 | Adjustable font size, colour, and transparency for internal coordinates | ![Adjustable font size, colour, and transparency](./media/alpha.jpg) |
 | Alt-click to *ping* the coordinates at the mouse location | ![Alt-click to ping mouse coordinates](./media/alt-click-to-ping-coordinates.jpg) |
