@@ -22,6 +22,7 @@
 | ------- | ------- |
 | Toggle the coordinate display mode | ![image showing the map display control](./media/toggle1.jpg) |
 | Alternately display coordinates inside each grid cell | ![Coordinates displayed in each grid cell](./media/internal.jpg) |
+| Adjustable font size, colour, and transparency for internal coordinates | ![Adjustable font size, colour, and transparency](./media/alpha.jpg) |
 | Alt-click to *ping* the coordinates at the mouse location | ![Alt-click to ping mouse coordinates](./media/alt-click-to-ping-coordinates.jpg) |
 | Great for hex crawls! | ![Great for hex crawls!](./media/hex-crawl.jpg) |
 | Also great for sci-fi sector maps! | ![Also great for sci-fi sector maps! ](./media/space-sector-map.jpg) |
