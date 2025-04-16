@@ -16,7 +16,7 @@
 - Each scene remembers whether the coordinates are shown or hidden for that scene.
 - Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes.
 
-## Gallery
+## Gallery of Features
 
 | Feature | Preview |
 | ------- | ------- |
