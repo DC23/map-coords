@@ -19,5 +19,6 @@
     "settings.internal-coordinate-size.name": "Internal Coordinate Percentage Size",
     "settings.internal-coordinate-size.hint": "Size of the internal font as a percentage of the grid cell",
     "settings.internal-coordinate-alpha.name": "Internal Coordinate Transparency",
-    "settings.internal-coordinate-alpha.hint": ""
+    "settings.internal-coordinate-alpha.hint": "",
+    "messages.grid-type-not-supported": "Coordinate display not supported on gridless maps"
 }

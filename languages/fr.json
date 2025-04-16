@@ -19,5 +19,6 @@
     "settings.internal-coordinate-size.name": "Taille en pourcentage des coordonnées internes",
     "settings.internal-coordinate-size.hint": "Taille de la police interne en pourcentage de la cellule de la grille",
     "settings.internal-coordinate-alpha.name": "Transparence des coordonnées internes",
-    "settings.internal-coordinate-alpha.hint": ""
+    "settings.internal-coordinate-alpha.hint": "",
+    "messages.grid-type-not-supported": "L’affichage des coordonnées n’est pas pris en charge sur les cartes sans grille"
 }
