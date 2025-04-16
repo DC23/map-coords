@@ -345,7 +345,9 @@ function registerKeybindings () {
         precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
         restricted: false,
         onDown: () => {
-            window?.MapCoordinates.toggle()
+            const coords = window.MapCoordinates
+            if (coords) coords.toggle()
+            else ui.notifications.warn(game.i18n.localize('messages.grid-type-not-supported'))
             return true
         },
     })
