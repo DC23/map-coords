@@ -12,6 +12,7 @@
 
 - Add coordinates to any square or hex map.
 - Set the numbering style - letters or numbers, font colour, and whether leading zeroes are used in the module settings.
+- Internal display mode also has alpha transparency and adjustable font sizing.
 - Alt-Click to "ping" your mouse location with its coordinates. The keybind is changeable in the module settings.
 - Each scene remembers whether the coordinates are shown or hidden for that scene.
 - Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes.
