@@ -1,3 +1,6 @@
+// alias PreciseText so the code doesn't become all verbose
+const PreciseText = foundry.canvas.containers.PreciseText
+
 // Coordinate display states
 const COORDINATE_DISPLAY_STATES = {
     HIDDEN: 1,
@@ -335,13 +338,16 @@ Hooks.on('canvasReady', () => {
     }
 })
 
-Hooks.on('getSceneControlButtons', getSceneControlButtons)
+// Doesn't work in v13
+// Hooks.on('getSceneControlButtons', getSceneControlButtons)
 
 Hooks.on('init', registerKeybindings)
 
 function registerKeybindings () {
-    game.keybindings.register('map-coords', 'toggle-coordinates', {
+    game.keybindings.register('map-coords', 'toggle-coordinate', {
         name: 'button.name',
+        // TODO: revert to unset once the bug in Foundry v13 that cannot edit unset keybinds is fixed.
+        editable: [{ key: 'KeyC', modifiers: ['ALT'] }],
         precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
         restricted: false,
         onDown: () => {
