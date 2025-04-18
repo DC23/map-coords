@@ -1,5 +1,5 @@
-// alias PreciseText so the code doesn't become all verbose
-const PreciseText = foundry.canvas.containers.PreciseText
+// This is not a good idea.
+// const PreciseText = foundry.canvas.containers.PreciseText
 
 // Coordinate display states
 const COORDINATE_DISPLAY_STATES = {
