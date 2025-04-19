@@ -24,11 +24,16 @@ class Coord {
         let pos = [0, 0]
         let i = 0
         let name = null
+
+        let preciseText
+        if (Number(game.version) >= 13) preciseText = foundry.canvas.containers.PreciseText
+        else preciseText = PreciseText
+
         // The horizontal row of column coordinates
         do {
             const adjustedColumnIndex = this.applyHexColumnAdjustment(i)
             let label = this.labelGen(this.xValue, adjustedColumnIndex)
-            name = new PreciseTextFactory(label, this.style)
+            name = new preciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
             pos = this.top(this.row0, i + this.col0)
@@ -52,7 +57,7 @@ class Coord {
         do {
             const adjustedRowIndex = this.applyHexRowAdjustment(i)
             let label = this.labelGen(this.yValue, adjustedRowIndex)
-            name = new PreciseTextFactory(label, this.style)
+            name = new preciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5, 0.5)
             pos = this.left(i + this.row0, this.col0)
@@ -84,7 +89,7 @@ class Coord {
             let r = 0
             do {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
-                let name = new PreciseTextFactory(
+                let name = new PreciseText(
                     Coord.formatCoordPair(rowName, colName),
                     tinyStyle
                 )
@@ -176,7 +181,7 @@ class Coord {
         const col = this.applyHexColumnAdjustment(offset.j - this.col0)
         const rowName = this.labelGen(this.yValue, row)
         const colName = this.labelGen(this.xValue, col)
-        let name = new PreciseTextFactory(Coord.formatCoordPair(rowName, colName), this.style)
+        let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
