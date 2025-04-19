@@ -84,7 +84,10 @@ class Coord {
             let r = 0
             do {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
-                let name = new PreciseTextFactory(Coord.formatCoordPair(rowName, colName), tinyStyle)
+                let name = new PreciseTextFactory(
+                    Coord.formatCoordPair(rowName, colName),
+                    tinyStyle
+                )
                 name.resolution = 4
                 name.alpha = alpha
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
