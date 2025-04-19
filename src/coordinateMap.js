@@ -1,18 +1,13 @@
-// Foundry Compatibility handling
-let preciseText
-
-if (Number(game.version) >= 13) {
-    preciseText = foundry.canvas.containers.PreciseText
-}
-else {
-    preciseText = PreciseText
-}
-
 // Coordinate display states
 const COORDINATE_DISPLAY_STATES = {
     HIDDEN: 1,
     ROW_COLUMN: 2,
     CELL: 3,
+}
+
+// For Foundry v13+ compatibility I need late resolution of the class
+function PreciseTextFactory () {
+    return Number(game.version) >= 13 ? foundry.canvas.containers.PreciseText : PreciseText
 }
 
 class Coord {
@@ -33,7 +28,7 @@ class Coord {
         do {
             const adjustedColumnIndex = this.applyHexColumnAdjustment(i)
             let label = this.labelGen(this.xValue, adjustedColumnIndex)
-            name = new preciseText(label, this.style)
+            name = new PreciseTextFactory(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
             pos = this.top(this.row0, i + this.col0)
@@ -57,7 +52,7 @@ class Coord {
         do {
             const adjustedRowIndex = this.applyHexRowAdjustment(i)
             let label = this.labelGen(this.yValue, adjustedRowIndex)
-            name = new preciseText(label, this.style)
+            name = new PreciseTextFactory(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5, 0.5)
             pos = this.left(i + this.row0, this.col0)
@@ -89,7 +84,7 @@ class Coord {
             let r = 0
             do {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
-                let name = new preciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
+                let name = new PreciseTextFactory(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
                 name.alpha = alpha
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
@@ -178,7 +173,7 @@ class Coord {
         const col = this.applyHexColumnAdjustment(offset.j - this.col0)
         const rowName = this.labelGen(this.yValue, row)
         const colName = this.labelGen(this.xValue, col)
-        let name = new preciseText(Coord.formatCoordPair(rowName, colName), this.style)
+        let name = new PreciseTextFactory(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
