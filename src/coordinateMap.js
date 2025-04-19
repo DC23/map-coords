@@ -5,7 +5,7 @@ const COORDINATE_DISPLAY_STATES = {
     CELL: 3,
 }
 
-// For Foundry v13+ compatibility I need late resolution of the class
+// For Foundry v13+ compatibility I need late resolution of the class and namespace
 function PreciseTextFactory () {
     return Number(game.version) >= 13 ? foundry.canvas.containers.PreciseText : PreciseText
 }
@@ -25,9 +25,7 @@ class Coord {
         let i = 0
         let name = null
 
-        let preciseText
-        if (Number(game.version) >= 13) preciseText = foundry.canvas.containers.PreciseText
-        else preciseText = PreciseText
+        const preciseText = PreciseTextFactory()
 
         // The horizontal row of column coordinates
         do {
@@ -78,6 +76,7 @@ class Coord {
 
     // Render grid cell coordinates
     individual () {
+        const preciseText = PreciseTextFactory()
         let tinyStyle = this.style.clone()
         const fontScale = Math.max(10, game.settings.get('map-coords', 'internalCoordSize')) / 100
         tinyStyle.fontSize = this.size * fontScale
@@ -89,7 +88,7 @@ class Coord {
             let r = 0
             do {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
-                let name = new PreciseText(
+                let name = new preciseText(
                     Coord.formatCoordPair(rowName, colName),
                     tinyStyle
                 )
@@ -181,7 +180,8 @@ class Coord {
         const col = this.applyHexColumnAdjustment(offset.j - this.col0)
         const rowName = this.labelGen(this.yValue, row)
         const colName = this.labelGen(this.xValue, col)
-        let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
+        const preciseText = PreciseTextFactory()
+        let name = new preciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
