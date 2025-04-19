@@ -317,7 +317,7 @@ class Coord {
 }
 
 function getSceneControlButtons (buttons) {
-    if (Coord.currentSceneIsSupported) {
+    if (Number(game.version) < 13 && Coord.currentSceneIsSupported) {
         const tokenButton = buttons.find(b => b.name == 'measure')
         if (tokenButton) {
             tokenButton.tools.push({
@@ -346,7 +346,7 @@ Hooks.on('canvasReady', () => {
 })
 
 // Doesn't work in v13
-// Hooks.on('getSceneControlButtons', getSceneControlButtons)
+Hooks.on('getSceneControlButtons', getSceneControlButtons)
 
 Hooks.on('init', registerKeybindings)
 
