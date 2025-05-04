@@ -5,9 +5,14 @@ const COORDINATE_DISPLAY_STATES = {
     CELL: 3,
 }
 
+// For Foundry v13+ compatibility I need late resolution of the class and namespace
+function PreciseTextFactory () {
+    return Number(game.version) >= 13 ? foundry.canvas.containers.PreciseText : PreciseText
+}
+
 class Coord {
     // Render margin coordinates
-    coords (rows, cols) {
+    coords () {
         /*
         Since the count of rows and columns includes padding, and was always problematic on hex grids 
         since the dimensions are funky in one direction, I'll switch to the algorithm used on
@@ -19,11 +24,14 @@ class Coord {
         let pos = [0, 0]
         let i = 0
         let name = null
+
+        const preciseText = PreciseTextFactory()
+
         // The horizontal row of column coordinates
         do {
             const adjustedColumnIndex = this.applyHexColumnAdjustment(i)
             let label = this.labelGen(this.xValue, adjustedColumnIndex)
-            name = new PreciseText(label, this.style)
+            name = new preciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5)
             pos = this.top(this.row0, i + this.col0)
@@ -47,7 +55,7 @@ class Coord {
         do {
             const adjustedRowIndex = this.applyHexRowAdjustment(i)
             let label = this.labelGen(this.yValue, adjustedRowIndex)
-            name = new PreciseText(label, this.style)
+            name = new preciseText(label, this.style)
             name.resolution = 4
             name.anchor.set(0.5, 0.5)
             pos = this.left(i + this.row0, this.col0)
@@ -68,6 +76,7 @@ class Coord {
 
     // Render grid cell coordinates
     individual () {
+        const preciseText = PreciseTextFactory()
         let tinyStyle = this.style.clone()
         const fontScale = Math.max(10, game.settings.get('map-coords', 'internalCoordSize')) / 100
         tinyStyle.fontSize = this.size * fontScale
@@ -79,7 +88,7 @@ class Coord {
             let r = 0
             do {
                 let rowName = this.labelGen(this.yValue, this.applyHexRowAdjustment(r))
-                let name = new PreciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
+                let name = new preciseText(Coord.formatCoordPair(rowName, colName), tinyStyle)
                 name.resolution = 4
                 name.alpha = alpha
                 const tl = canvas.grid.getTopLeftPoint({ i: r + this.row0, j: c + this.col0 })
@@ -168,7 +177,8 @@ class Coord {
         const col = this.applyHexColumnAdjustment(offset.j - this.col0)
         const rowName = this.labelGen(this.yValue, row)
         const colName = this.labelGen(this.xValue, col)
-        let name = new PreciseText(Coord.formatCoordPair(rowName, colName), this.style)
+        const preciseText = PreciseTextFactory()
+        let name = new preciseText(Coord.formatCoordPair(rowName, colName), this.style)
         name.resolution = 4
         name.anchor.set(0.2)
         name.position.set(pos.x, pos.y)
@@ -279,7 +289,7 @@ class Coord {
         }
 
         this.addContainer()
-        this.coords(canvas.dimensions.rows, canvas.dimensions.columns)
+        this.coords()
         this.individual()
 
         this.addListener()
@@ -307,7 +317,7 @@ class Coord {
 }
 
 function getSceneControlButtons (buttons) {
-    if (Coord.currentSceneIsSupported) {
+    if (Number(game.version) < 13 && Coord.currentSceneIsSupported) {
         const tokenButton = buttons.find(b => b.name == 'measure')
         if (tokenButton) {
             tokenButton.tools.push({
@@ -335,13 +345,16 @@ Hooks.on('canvasReady', () => {
     }
 })
 
+// Doesn't work in v13
 Hooks.on('getSceneControlButtons', getSceneControlButtons)
 
 Hooks.on('init', registerKeybindings)
 
 function registerKeybindings () {
-    game.keybindings.register('map-coords', 'toggle-coordinates', {
+    game.keybindings.register('map-coords', 'toggle-coordinate', {
         name: 'button.name',
+        // TODO: revert to unset once the bug in Foundry v13 that cannot edit unset keybinds is fixed.
+        editable: [{ key: 'KeyC', modifiers: ['ALT'] }],
         precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
         restricted: false,
         onDown: () => {
