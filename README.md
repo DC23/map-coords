@@ -15,7 +15,7 @@
 - Internal display mode also has alpha transparency and adjustable font sizing.
 - Alt-Click to "ping" your mouse location with its coordinates. The keybind is changeable in the module settings.
 - Each scene remembers whether the coordinates are shown or hidden for that scene.
-- Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes.
+- Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes. Note that in Foundry 13+, you must use the keybind, defaults to `Alt-C` to toggle the coordinates.
 
 ## Gallery of Features
 
