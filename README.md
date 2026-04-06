@@ -8,14 +8,14 @@
 ![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/DC23/map-coords/latest/total?logo=GitHub&label=Downloads%3A%20Latest)
 
 > [!IMPORTANT]
-> v1.0.0 release! This module is now feature complete. I might still add improvements, but everything is now present and working as far as I know 😀
+> As of the v1.0.0 release, this module is feature complete. I might still add improvements, but everything is now present and working as far as I know 😀
 
 - Add coordinates to any square or hex map.
 - Set the numbering style - letters or numbers, font colour, and whether leading zeroes are used in the module settings.
 - Internal display mode also has alpha transparency and adjustable font sizing.
 - Alt-Click to "ping" your mouse location with its coordinates. The keybind is changeable in the module settings.
 - Each scene remembers whether the coordinates are shown or hidden for that scene.
-- Use the Measurement Controls menu with the World Map icon 🌐 to toggle between display modes. Note that in Foundry 13+, you must use the keybind, defaults to `Alt-C` to toggle the coordinates.
+- Use the keybind, defaults to `Alt-C`, to toggle the coordinate display modes.
 
 ## Gallery of Features
 
