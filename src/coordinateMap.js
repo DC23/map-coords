@@ -172,6 +172,7 @@ class Coord {
 
     mouseCoords () {
         const pos = canvas.mousePosition
+        if (!this.internal.contains(pos.x, pos.y)) return; // don't render if the coordinates are outside the scene boundary
         const offset = canvas.grid.getOffset({ x: pos.x, y: pos.y })
         const row = this.applyHexRowAdjustment(offset.i - this.row0)
         const col = this.applyHexColumnAdjustment(offset.j - this.col0)
